@@ -1,0 +1,16 @@
+group = 'com.aucguy.pluginWrapper'
+version = '0.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	compile gradleApi()
+}
