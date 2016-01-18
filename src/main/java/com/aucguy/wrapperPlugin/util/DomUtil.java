@@ -9,6 +9,13 @@ import java.util.Iterator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -50,12 +57,17 @@ public final class DomUtil {
 			return this;
 		}
 	}
+	
 	private static final DomUtil instance = new DomUtil();
 	private static DocumentBuilder builder;
+	private static Transformer transformer;
+	
 	static {
 		try {
 			builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
+			transformer = TransformerFactory.newInstance().newTransformer();
+		} catch (ParserConfigurationException | TransformerConfigurationException 
+				| TransformerFactoryConfigurationError e) {
 			throw(new RuntimeException(e));
 		}
 	}
@@ -65,6 +77,10 @@ public final class DomUtil {
 		Document doc = builder.parse(stream);
 		stream.close();
 		return doc;
+	}
+	
+	public static void saveDocument(Document doc, File f) throws TransformerException {
+		transformer.transform(new DOMSource(doc), new StreamResult(f));
 	}
 	
 	public static ElementIter iter(Node node) {
