@@ -7,11 +7,16 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
 /**
- * prints the classpath
+ * This is a task that prints the classpath that this task is executing under.
+ * Probably won't be used.
  */
 public class PrintClasspathTask extends DefaultTask {
+	//the name of the task
 	public static final String TASK_NAME = "printClasspath";
 	
+	/**
+	 * This does the task
+	 */
 	@TaskAction
 	public void doTask() {
 		ClassLoader classloader = getClass().getClassLoader();

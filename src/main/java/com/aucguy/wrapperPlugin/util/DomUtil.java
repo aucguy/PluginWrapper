@@ -24,7 +24,8 @@ import org.xml.sax.SAXException;
 import org.w3c.dom.Node;
 
 /**
- * various tools for DOM
+ * These are various tools for DOM. Most of them aren't used.
+ * They're just here in case their ever needed.
  */
 public final class DomUtil {
 	public class ElementIter implements Iterable<Element>, Iterator<Element> {
@@ -58,10 +59,11 @@ public final class DomUtil {
 		}
 	}
 	
-	private static final DomUtil instance = new DomUtil();
-	private static DocumentBuilder builder;
-	private static Transformer transformer;
+	private static final DomUtil instance = new DomUtil(); //the instance
+	private static DocumentBuilder builder; //the thing that creates documents
+	private static Transformer transformer; //the thing that saves documentss
 	
+	//create builder and transformer
 	static {
 		try {
 			builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -71,7 +73,7 @@ public final class DomUtil {
 			throw(new RuntimeException(e));
 		}
 	}
-		
+	
 	public static Document parseDocument(File f) throws SAXException, IOException {
 		InputStream stream = new FileInputStream(f);
 		Document doc = builder.parse(stream);
@@ -83,6 +85,11 @@ public final class DomUtil {
 		transformer.transform(new DOMSource(doc), new StreamResult(f));
 	}
 	
+	/**
+	 * iterates over the children of an element
+	 * @param node the element to iterate over
+	 * @return the iterator
+	 */
 	public static ElementIter iter(Node node) {
 		return instance.new ElementIter(node);
 	}

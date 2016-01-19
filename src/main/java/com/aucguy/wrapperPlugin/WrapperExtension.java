@@ -1,13 +1,15 @@
 package com.aucguy.wrapperPlugin;
 
 /**
- * extension class
+ * This holds user specified valeus from build.gradle.
  */
 public class WrapperExtension {
-	private String classpath; //classpath to load the plugin under
+	public static final String EXTENSION = "wrapper"; //name of the extension
+	
+	private String classpath; //binaries of the plugin
 	private String plugin; //id of the plugin to load
-	private String pom; //pom file with dependencies
-	private String extraDep; //dependencies not in the pom file
+	private String pom; //maven coordinate of the already built plugin
+	private String extraDep; //maven coordinates of dependencies not in the pom file
 	
 	public String getClasspath() {
 		return classpath;
