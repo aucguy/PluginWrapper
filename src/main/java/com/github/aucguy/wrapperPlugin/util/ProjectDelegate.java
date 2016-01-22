@@ -1,4 +1,4 @@
-package com.aucguy.wrapperPlugin.util;
+package com.github.aucguy.wrapperPlugin.util;
 
 import java.io.File;
 import java.net.URI;

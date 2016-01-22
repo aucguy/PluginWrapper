@@ -1,9 +1,9 @@
-package com.aucguy.wrapperPlugin;
+package com.github.aucguy.wrapperPlugin;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
-import com.aucguy.wrapperPlugin.util.Invoker;
+import com.github.aucguy.wrapperPlugin.util.Invoker;
 
 /**
  * This is the main plugin class.

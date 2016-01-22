@@ -1,4 +1,4 @@
-package com.aucguy.wrapperPlugin.util;
+package com.github.aucguy.wrapperPlugin.util;
 
 import org.gradle.api.Action;
 import org.gradle.api.Project;

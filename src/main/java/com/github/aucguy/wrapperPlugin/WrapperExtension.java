@@ -1,4 +1,4 @@
-package com.aucguy.wrapperPlugin;
+package com.github.aucguy.wrapperPlugin;
 
 /**
  * This holds user specified valeus from build.gradle.

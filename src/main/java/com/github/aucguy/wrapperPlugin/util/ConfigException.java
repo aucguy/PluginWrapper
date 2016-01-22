@@ -1,4 +1,4 @@
-package com.aucguy.wrapperPlugin.util;
+package com.github.aucguy.wrapperPlugin.util;
 
 /**
  * This is thrown for messed up extensions

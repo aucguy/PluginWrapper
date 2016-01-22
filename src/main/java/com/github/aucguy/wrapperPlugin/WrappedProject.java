@@ -1,9 +1,9 @@
-package com.aucguy.wrapperPlugin;
+package com.github.aucguy.wrapperPlugin;
 
 import org.gradle.api.Action;
 import org.gradle.api.Project;
 
-import com.aucguy.wrapperPlugin.util.ProjectDelegate;
+import com.github.aucguy.wrapperPlugin.util.ProjectDelegate;
 
 /**
  * This is a project that overrides methods of another project via delegation.

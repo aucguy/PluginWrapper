@@ -1,4 +1,4 @@
-package com.aucguy.wrapperPlugin;
+package com.github.aucguy.wrapperPlugin;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,10 +24,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import com.aucguy.wrapperPlugin.util.ConfigException;
-import com.aucguy.wrapperPlugin.util.DomUtil;
-import com.aucguy.wrapperPlugin.util.Invoker;
-import com.aucguy.wrapperPlugin.util.MavenCoord;
+import com.github.aucguy.wrapperPlugin.util.ConfigException;
+import com.github.aucguy.wrapperPlugin.util.DomUtil;
+import com.github.aucguy.wrapperPlugin.util.Invoker;
+import com.github.aucguy.wrapperPlugin.util.MavenCoord;
 
 /**
  * This is the task for loading the wrapped plugin. It loads any of its dependencies,
@@ -57,7 +57,7 @@ import com.aucguy.wrapperPlugin.util.MavenCoord;
  */
 public class LoadTask extends DefaultTask {
 	//name of the invoker class
-	private static final String INVOKER_CL = "com.aucguy.wrapperPlugin.util.Invoker";
+	private static final String INVOKER_CL = "com.github.aucguy.wrapperPlugin.util.Invoker";
 	//place of the plugin manifest
 	private static final String PLUGIN_MANIFEST = "META-INF/gradle-plugins/%s.properties";
 	//property name of the plugin class in the manifest

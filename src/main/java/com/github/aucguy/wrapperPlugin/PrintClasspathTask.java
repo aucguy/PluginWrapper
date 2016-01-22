@@ -1,4 +1,4 @@
-package com.aucguy.wrapperPlugin;
+package com.github.aucguy.wrapperPlugin;
 
 import java.net.URL;
 import java.net.URLClassLoader;
