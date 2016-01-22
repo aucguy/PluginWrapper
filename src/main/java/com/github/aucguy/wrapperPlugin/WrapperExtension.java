@@ -10,6 +10,7 @@ public class WrapperExtension {
 	private String plugin; //id of the plugin to load
 	private String pom; //maven coordinate of the already built plugin
 	private String extraDep; //maven coordinates of dependencies not in the pom file
+	private boolean pause = false; //whether to pause or not
 	
 	public String getClasspath() {
 		return classpath;
@@ -41,5 +42,13 @@ public class WrapperExtension {
 	
 	public void setExtraDep(String x) {
 		extraDep = x;
+	}
+	
+	public boolean getPause() {
+		return pause;
+	}
+	
+	public void setPause(boolean x) {
+		pause = x;
 	}
 }
