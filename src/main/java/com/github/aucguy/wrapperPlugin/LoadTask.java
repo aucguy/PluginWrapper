@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -84,16 +85,18 @@ public class LoadTask extends DefaultTask {
 	 * @throws IllegalAccessException if the plugin class or constructor isn't public
 	 * @throws ClassNotFoundException if the class specified in the plugin manifest does not exist
 	 * @throws TransformerException if there was a problem saving the modified POM
+	 * @throws InterruptedException 
 	 */
 	@TaskAction
     public void doTask() throws MalformedURLException, IOException, SAXException, InstantiationException, 
-    		IllegalAccessException, ClassNotFoundException, TransformerException {
+    		IllegalAccessException, ClassNotFoundException, TransformerException, InterruptedException {
 		//get and check validity of extension properties
 		WrapperExtension ext = (WrapperExtension) getProject().getExtensions().getByName(WrapperExtension.EXTENSION);
 		String plugin = ext.getPlugin();
 		String path = ext.getClasspath();
 		String pomId = ext.getPom();
 		String extraDep = ext.getExtraDep(); //can be null
+		boolean pause = ext.getPause();
 		ConfigException.raiseIfNull(plugin, "plugin");
 		ConfigException.raiseIfNull(path, "classpath");
 		ConfigException.raiseIfNull(pomId, "pom");
@@ -108,6 +111,12 @@ public class LoadTask extends DefaultTask {
 		copyPOM(repo, inputCoord, outputCoord);
 		createZip(repo, outputCoord);
 		Set<File> libs = getClasspath(outputCoord, extraDep, path);
+		if(pause) {
+			System.out.println("press <enter> to continue");
+			Scanner scanner = new Scanner(System.in);
+			scanner.nextLine();
+			scanner.close();
+		}
 		runPlugin(libs, plugin);
 	}
 	
