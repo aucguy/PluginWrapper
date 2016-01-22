@@ -1,4 +1,4 @@
-group = 'com.aucguy.pluginWrapper'
+group = 'com.github.aucguy.pluginWrapper'
 version = '0.0-SNAPSHOT'
 
 apply plugin: 'groovy'
