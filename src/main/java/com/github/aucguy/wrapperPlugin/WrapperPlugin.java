@@ -2,6 +2,7 @@ package com.github.aucguy.wrapperPlugin;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.repositories.MavenArtifactRepository;
 
 import com.github.aucguy.wrapperPlugin.util.Invoker;
 
@@ -13,6 +14,7 @@ public class WrapperPlugin implements Plugin<Project> {
 	
 	Project wrappedProject; //project with overwritten methods
 	Invoker invoker; //invoking thing loaded through the wrapped classpath
+	MavenArtifactRepository repository; //mavenLocal
 	
 	@Override
 	public void apply(Project project) {
@@ -22,6 +24,7 @@ public class WrapperPlugin implements Plugin<Project> {
 			wrappedProject.getExtensions().create(WrapperExtension.EXTENSION, WrapperExtension.class);
 			wrappedProject.getTasks().create(LoadTask.TASK_NAME, LoadTask.class); //add tasks
 			wrappedProject.getTasks().create(PrintClasspathTask.TASK_NAME, PrintClasspathTask.class);
+			repository = wrappedProject.getBuildscript().getRepositories().mavenLocal();
 		} catch (Exception error) {
 			throw new RuntimeException(error);
 		}

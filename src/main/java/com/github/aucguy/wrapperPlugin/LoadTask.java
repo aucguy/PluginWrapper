@@ -102,7 +102,7 @@ public class LoadTask extends DefaultTask {
 		ConfigException.raiseIfNull(pomId, "pom");
 		
 		//create coordinates
-		MavenArtifactRepository repo = getProject().getRepositories().mavenLocal(); 
+		MavenArtifactRepository repo = WrapperPlugin.instance.repository; 
 		MavenCoord inputCoord = new MavenCoord(pomId);
 		MavenCoord outputCoord = new MavenCoord(pomId);
 		outputCoord.groupId = GROUP_PREFIX + outputCoord.groupId;

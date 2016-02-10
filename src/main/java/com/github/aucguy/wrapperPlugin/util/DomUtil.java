@@ -2,6 +2,7 @@ package com.github.aucguy.wrapperPlugin.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -81,8 +82,11 @@ public final class DomUtil {
 		return doc;
 	}
 	
-	public static void saveDocument(Document doc, File f) throws TransformerException {
-		transformer.transform(new DOMSource(doc), new StreamResult(f));
+	public static void saveDocument(Document doc, File f) throws TransformerException, IOException {
+		f.getParentFile().mkdirs();
+		FileWriter writer = new FileWriter(f);
+		transformer.transform(new DOMSource(doc), new StreamResult(writer));
+		writer.close();
 	}
 	
 	/**
