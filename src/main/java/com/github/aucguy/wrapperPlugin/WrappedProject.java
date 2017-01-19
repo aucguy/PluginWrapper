@@ -2,6 +2,7 @@ package com.github.aucguy.wrapperPlugin;
 
 import org.gradle.api.Action;
 import org.gradle.api.Project;
+import org.gradle.api.initialization.dsl.ScriptHandler;
 
 import com.github.aucguy.wrapperPlugin.util.ProjectDelegate;
 
@@ -14,15 +15,20 @@ public class WrappedProject extends ProjectDelegate {
 	}
 	
 	/**
-	 * This executes the action after evalution but under the wrapped classpath
+	 * This executes the action after evaluation but under the wrapped classpath
 	 */
 	@Override
 	public void afterEvaluate(Action<? super Project> action) {
-		delegate.afterEvaluate(new Action<Project>() {
+		super.afterEvaluate(new Action<Project>() {
 			@Override
 			public void execute(Project project) {
 				WrapperPlugin.instance.invoker.execute(action, project); //invoke under the classpath
 			}
 		});
+	}
+	
+	@Override
+	public ScriptHandler getBuildscript() {
+		return new WrappedScriptHandler(super.getBuildscript());
 	}
 }

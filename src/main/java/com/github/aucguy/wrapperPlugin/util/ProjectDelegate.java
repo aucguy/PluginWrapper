@@ -24,6 +24,7 @@ import org.gradle.api.component.SoftwareComponentContainer;
 import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.ConfigurableFileTree;
 import org.gradle.api.file.CopySpec;
+import org.gradle.api.file.DeleteSpec;
 import org.gradle.api.file.FileTree;
 import org.gradle.api.initialization.dsl.ScriptHandler;
 import org.gradle.api.invocation.Gradle;
@@ -49,7 +50,7 @@ import groovy.lang.MissingPropertyException;
  * edit this manually
  */
 @SuppressWarnings("rawtypes")
-public class ProjectDelegate implements Project{
+public class ProjectDelegate implements Project {
 	public Project delegate;
 	
 	public ProjectDelegate(Project x) {
@@ -84,7 +85,15 @@ public class ProjectDelegate implements Project{
 		return delegate.getRootDir();
 	}
 
-	public File getBuildDir() {
+	public WorkResult delete(Action<? super DeleteSpec> arg0) {
+		return delegate.delete(arg0);
+	}
+
+	public Object findProperty(String arg0) {
+		return delegate.findProperty(arg0);
+	}
+
+    public File getBuildDir() {
 		return delegate.getBuildDir();
 	}
 

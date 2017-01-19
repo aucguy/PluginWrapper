@@ -1,5 +1,8 @@
 package com.github.aucguy.wrapperPlugin;
 
+import java.io.File;
+import java.util.Set;
+
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository;
@@ -15,6 +18,7 @@ public class WrapperPlugin implements Plugin<Project> {
 	Project wrappedProject; //project with overwritten methods
 	Invoker invoker; //invoking thing loaded through the wrapped classpath
 	MavenArtifactRepository repository; //mavenLocal
+	Set<File> pluginBin; //files for the developing plugin
 	
 	@Override
 	public void apply(Project project) {

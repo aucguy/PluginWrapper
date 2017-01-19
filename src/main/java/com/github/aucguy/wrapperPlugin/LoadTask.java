@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.HashSet;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
@@ -53,7 +54,7 @@ import com.github.aucguy.wrapperPlugin.util.MavenCoord;
  * The resolution then returns a set of files which are the dependency archives, aka the classpath.
  * The plugin binaries are then added to this.
  * 
- * Finally, these are pluged into a {@link URLClassLoader} which then loads the manifest. The manifest
+ * Finally, these are plugged into a {@link URLClassLoader} which then loads the manifest. The manifest
  * then is used to find the plugin class which is subsequently loaded.
  */
 public class LoadTask extends DefaultTask {
@@ -117,7 +118,10 @@ public class LoadTask extends DefaultTask {
 			scanner.nextLine();
 			scanner.close();
 		}
-		runPlugin(libs, plugin);
+		
+		for(String i : plugin.split(";")) {
+			runPlugin(libs, i);
+		}
 	}
 	
 	/**
@@ -181,12 +185,20 @@ public class LoadTask extends DefaultTask {
 		//initialize maven dependencies
 		Set<File> libs = pompath.resolve();
 		
+		Set<File> bin = new HashSet<File>();
+		
 		//add plugin binaries
 		parts = path.split(";");
 		for(int i=0; i<parts.length; i++) {
-			libs.add(new File(parts[i]));
+			File directory = new File(parts[i]);
+			if(!directory.exists()) {
+				throw(new RuntimeException("'" + directory.getPath() + "' does not exist"));
+			}
+			bin.add(directory);
 		}
 		
+		WrapperPlugin.instance.pluginBin = bin;
+		libs.addAll(bin);
 		return libs;
 	}
 	
